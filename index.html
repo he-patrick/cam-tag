@@ -28,7 +28,7 @@
 
         // Convenience function to setup a webcam
         const flip = true; // whether to flip the webcam
-        webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+        webcam = new tmImage.Webcam(1000, 700, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
         await webcam.play();
         window.requestAnimationFrame(loop);
@@ -46,7 +46,7 @@
         await predict();
         window.requestAnimationFrame(loop);
     }
-    var audio = new Audio('sample3.wav');
+    var audio = new Audio('sample2.mp3');
     // run the webcam image through the image model
     async function predict() {
         // predict can take in an image, video or canvas html element
@@ -56,13 +56,13 @@
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                 labelContainer.childNodes[i].innerHTML = classPrediction;
                 
-                if(prediction[i].className == "Knife" && prediction[i].probability.toFixed(2) > 0.5){                   
+                if(prediction[i].className == "Knife" && prediction[i].probability.toFixed(2) > 0.9){                   
                     
                     //play sound file
                     audio.play();
                     //alert("You are " + prediction[i].className);
                 }
-                else if(prediction[i].className == "Knife" && prediction[i].probability.toFixed(2) <= 0.5){
+                else if(prediction[i].className == "Knife" && prediction[i].probability.toFixed(2) <= 0.9){
                     
                     audio.pause();
                 }
